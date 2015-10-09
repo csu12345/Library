@@ -1,0 +1,49 @@
+ package library.tests;
+
+ 
+
++import javax.management.RuntimeErrorException;
+
+ import org.junit.After;
+
+ import org.junit.AfterClass;
+
+ import org.junit.Before;
+
+         Book book = new Book("author1", "title1", "callNo1", 1);
+
+         book.borrow(null);
+
+     }
+
++    
+
++       
+
++    @Test
+
++    public void testDispose() {
+
++        Book book = new Book("author1", "title1", "callNo1", 1);
+
++        book.dispose();
+
++        assertEquals(book.getState(), EBookState.DISPOSED);
+
++    }
+
++    
+
++     @Test
+
++    public void testDisposeBookNotAvailable() {
+
++        Book book = new Book("author1", "title1", "callNo1", 1);
+
++        book.dispose();
+
++        assertEquals(book.getState(), EBookState.DISPOSED);
+
++    }
+
+ }
