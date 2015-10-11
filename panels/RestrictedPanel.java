@@ -16,7 +16,6 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-
 public class RestrictedPanel extends ABorrowPanel {
 
 	private static final long serialVersionUID = 1L;
