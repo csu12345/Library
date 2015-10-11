@@ -1,0 +1,64 @@
+package library.tests.integration;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import library.BorrowUC_CTL;
+import library.daos.BookHelper;
+import library.daos.BookMapDAO;
+import library.daos.LoanHelper;
+import library.daos.LoanMapDAO;
+import library.daos.MemberHelper;
+import library.daos.MemberMapDAO;
+import library.hardware.CardReader;
+import library.hardware.Display;
+import library.hardware.Printer;
+import library.hardware.Scanner;
+import library.interfaces.EBorrowState;
+import library.interfaces.daos.IBookDAO;
+import library.interfaces.daos.ILoanDAO;
+import library.interfaces.daos.IMemberDAO;
+import library.interfaces.hardware.ICardReader;
+import library.interfaces.hardware.IDisplay;
+import library.interfaces.hardware.IPrinter;
+import library.interfaces.hardware.IScanner;
+import org.junit.Before;
+import org.junit.Test;
+import org.powermock.api.support.membermodification.MemberModifier;
+
+public class SwipeCardTest {
+    
+    private BorrowUC_CTL ctl;
+    
+    @Before
+    public void onSetUp() {
+        // create hardware entities
+        ICardReader cardReader = new CardReader();
+        IScanner scanner = new Scanner();
+        IPrinter printer = new Printer();
+        IDisplay display = new Display();
+        // create daos
+        IBookDAO bookDAO = new BookMapDAO(new BookHelper());
+        IMemberDAO memberDAO = new MemberMapDAO(new MemberHelper());
+        memberDAO.addMember("fname1", "lname1", "0001", "");
+        ILoanDAO loanDAO = new LoanMapDAO(new LoanHelper());
+        // create ctl 
+        ctl = new BorrowUC_CTL(cardReader, scanner, printer, display, bookDAO, loanDAO, memberDAO);
+    }
+    
+    @Test(expected = RuntimeException.class)
+    public void testSCWithoutValidState() {
+        try {
+            ctl.initialise();
+            MemberModifier.field(BorrowUC_CTL.class, "state").set(ctl, EBorrowState.CREATED);
+            ctl.cardSwiped(1);
+        } catch (IllegalArgumentException | IllegalAccessException ex) {
+            Logger.getLogger(SwipeCardTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    @Test
+    public void testSCMemberInvalid() {
+        
+    }
+    
+}
