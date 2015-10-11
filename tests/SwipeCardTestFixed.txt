@@ -1,0 +1,35 @@
+package library.tests;
+
+import java.awt.Frame;
+import library.Main;
+import library.hardware.CardReader;
+import library.panels.MainPanel;
+import org.assertj.swing.core.BasicComponentFinder;
+import org.assertj.swing.core.ComponentFinder;
+import org.assertj.swing.fixture.FrameFixture;
+import org.assertj.swing.fixture.JPanelFixture;
+import org.assertj.swing.junit.testcase.AssertJSwingJUnitTestCase;
+import org.assertj.swing.launcher.ApplicationLauncher;
+import org.junit.Test;
+
+public class SwipeCardTest extends AssertJSwingJUnitTestCase {
+    
+    private FrameFixture cardReaderWindow;
+    private JPanelFixture mainWindow;
+    
+    @Override
+    protected void onSetUp() {
+        ApplicationLauncher.application(Main.class).start();
+        ComponentFinder finder = BasicComponentFinder.finderWithNewAwtHierarchy();
+        mainWindow = new JPanelFixture(robot(), (MainPanel) finder.findByType(MainPanel.class));
+        mainWindow.button("Borrow Books").click();
+        cardReaderWindow = new FrameFixture(robot(), (Frame) finder.findByType(CardReader.class));
+        System.out.println("Exit");
+    }
+    
+    @Test
+    public void testSCMemberNotRestricted() {
+        
+    }
+    
+}
