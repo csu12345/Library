@@ -1,9 +1,7 @@
 package library.tests;
 
 import java.awt.Frame;
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
+import javax.swing.*;
 import library.BorrowUC_CTL;
 import library.Main;
 import library.hardware.CardReader;
