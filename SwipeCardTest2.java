@@ -16,9 +16,6 @@ package library.tests;
 +        application(Main.class).start();
 +    }
 +    
-+    @Test
-+    public void testSCMemberNotRestricted() {
-+        
-+    }
++    
      
  }
