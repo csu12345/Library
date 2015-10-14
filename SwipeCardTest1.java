@@ -11,11 +11,7 @@ import library.hardware.Scanner;
 import library.interfaces.EBorrowState;
 import library.panels.MainPanel;
 import library.panels.ScanningPanel;
-import org.assertj.swing.core.BasicComponentFinder;
-import org.assertj.swing.core.ComponentFinder;
-import org.assertj.swing.core.GenericTypeMatcher;
-import org.assertj.swing.core.matcher.JButtonMatcher;
-import org.assertj.swing.core.matcher.JLabelMatcher;
+import org.assertj.swing.*
 import org.assertj.swing.fixture.FrameFixture;
 import org.assertj.swing.fixture.JPanelFixture;
 import org.assertj.swing.junit.testcase.AssertJSwingJUnitTestCase;
